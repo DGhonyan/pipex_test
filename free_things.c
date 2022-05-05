@@ -55,26 +55,15 @@ void	free_not_error(int *pipes, char *path)
 //	return (-1);
 //}
 //
-//void	free_ptr_arr(void **ptr, int size, int type)
-//{
-//	int	i;
-//
-//	i = 0;
-//	if (type == 0)
-//	{
-//		while (i < size)
-//		{
-//			free(((char **)ptr)[i]);
-//			i++;
-//		}
-//	}
-//	else if (type == 1)
-//	{
-//		while (i < size)
-//		{
-//			free(((int **)ptr)[i]);
-//			i++;
-//		}
-//	}
-//	free(ptr);
-//}
+void	free_ptr_arr(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	while (ptr[i])
+	{
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
+}

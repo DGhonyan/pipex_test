@@ -24,13 +24,13 @@
 //int		child1(char *path, char **args, int *pipes, char *file);
 //int		child2(char *path, char **args, int *pipes, char *file);
 //char	*new_path(char *path);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(char *s1, char *s2, char *s3, char *s4, char *s5);
 char	*ft_strjoin_for_read(char *s1, char c);
-//char	**ft_split(char const *s, char c);
+char	**ft_split(char const *s, char c);
 //char	**ft_kinda_split(char **s, char *new);
 //void	whereis(int *pipes, char *command, char **envp);
 void	perror_exit(int condition, char *errmsg);
-//void	free_ptr_arr(void **arr, int size, int type);
+void	free_ptr_arr(char **arr);
 void	free_error(int *pipes, char *path, int condition, char *errmsg);
 void	free_not_error(int *pipes, char *path);
 void	free_pipes_error(int *pipes1, int *pipes2, int condition, char *errmsg);

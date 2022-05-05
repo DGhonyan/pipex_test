@@ -37,15 +37,14 @@ static size_t	len(const char *s)
 // 	s1[i] = '\0';
 // }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char * s1, char * s2, char * s3, char * s4, char * s5)
 {
 	size_t	i;
 	size_t	j;
 	char	*res;
 
 	i = 0;
-	j = 0;
-	res = (char *)malloc(sizeof (*res) * (len(s1) + len(s2) + 1));
+	res = (char *)malloc(sizeof (*res) * (len(s1) + len(s2) + len(s3) + len(s4) + len(s5) + 1 + 1)); // +1 for spaces
 	if (!res)
 		return (NULL);
 	while (i < len(s1))
@@ -53,9 +52,35 @@ char	*ft_strjoin(char *s1, char *s2)
 		res[i] = s1[i];
 		i++;
 	}
+	j = 0;
+	//res[i++] = ' ';
 	while (j < len(s2))
 	{
 		res[i] = s2[j];
+		i++;
+		j++;
+	}
+	j = 0;
+	res[i++] = ' ';
+	while (j < len(s3))
+	{
+		res[i] = s3[j];
+		i++;
+		j++;
+	}
+	j = 0;
+	//res[i++] = ' ';
+	while (j < len(s4))
+	{
+		res[i] = s4[j];
+		i++;
+		j++;
+	}
+	j = 0;
+	//res[i++] = ' ';
+	while (j < len(s5))
+	{
+		res[i] = s5[j];
 		i++;
 		j++;
 	}

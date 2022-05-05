@@ -1,0 +1,20 @@
+total 424
+-rw-r--r--   1 tumolabsstudent  staff    304 May  5 19:48 Makefile
+-rwxr-xr-x   1 tumolabsstudent  staff  51026 May  5 20:28 a.out
+-rw-r--r--   1 tumolabsstudent  staff    245 May  5 17:30 colors.h
+drwxr-xr-x  12 tumolabsstudent  staff    384 May  5 17:52 files_from
+drwxr-xr-x  12 tumolabsstudent  staff    384 May  5 17:52 files_to
+-rw-r--r--   1 tumolabsstudent  staff   1764 May  5 20:47 free_things.c
+-rw-r--r--   1 tumolabsstudent  staff   1184 May  5 20:59 free_things.o
+-rw-r--r--   1 tumolabsstudent  staff   2301 May  5 20:37 ft_split.c
+-rw-r--r--   1 tumolabsstudent  staff   2052 May  5 20:59 ft_split.o
+-rw-r--r--   1 tumolabsstudent  staff   2141 May  5 20:50 ft_strjoin.c
+-rw-r--r--   1 tumolabsstudent  staff   1804 May  5 20:59 ft_strjoin.o
+-rw-r--r--   1 tumolabsstudent  staff   1128 May  5 17:30 perror_exit.c
+-rw-r--r--   1 tumolabsstudent  staff    620 May  5 20:59 perror_exit.o
+-rwxr-xr-x   1 tumolabsstudent  staff  52226 May  5 18:34 pipex
+-rw-r--r--   1 tumolabsstudent  staff   2144 May  5 20:48 pipex.h
+-rwxr-xr-x   1 tumolabsstudent  staff  51287 May  5 20:59 pipex_test
+-rw-r--r--   1 tumolabsstudent  staff   2667 May  5 20:59 pipex_test.c
+-rw-r--r--   1 tumolabsstudent  staff   4996 May  5 20:59 pipex_test.o
+drwxr-xr-x  12 tumolabsstudent  staff    384 May  5 17:52 results

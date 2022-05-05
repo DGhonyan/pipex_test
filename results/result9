@@ -1,0 +1,11 @@
+		if (a == 0)
+	if ((pid = fork()) < 0)
+	if (pid == 0)
+		if (dup2(fileFROM, STDIN_FILENO) < 0)
+		if (dup2(fileTO, STDOUT_FILENO) < 0)
+		"cat pipex_test.c | grep if "
+		"\"cat pipex_test.c\" | \"grep if\" "
+		if ((results_arr[i] = open(results, O_RDWR | O_TRUNC)) < 1)
+		if ((files_from_arr[i] = open(files_from, O_RDWR)) < 1)
+		if ((files_to_arr[i] = open(files_to, O_RDWR | O_TRUNC)) < 1)
+		if (system(pipex_argv) < 0)
