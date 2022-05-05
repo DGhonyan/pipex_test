@@ -3,9 +3,28 @@
 	if (pid == 0)
 		if (dup2(fileFROM, STDIN_FILENO) < 0)
 		if (dup2(fileTO, STDOUT_FILENO) < 0)
+void	call_diff(char * file1, char * file2, int fd)
+	if ((pid = fork()) < 0)
+		error_exit("Failed to for process at call_diff");
+	if (!pid)
+		// if ((fd = open("diffs", O_TRUNC | O_RDWR)) < 0)
+		// 	error_exit("Failed to open diffs file");
+		if (dup2(fd, STDOUT_FILENO) < 0)
+			error_exit("Failed to redirect output to diffs");
+		system_status = system(command = ft_strjoin("diff ", file1, file2, "", ""));
+		if (system_status < 0 || system_status == 127)
+			perror("System failed at call_diff");
+	int		diffs_fd;
+	char	*diffs_res = NULL;
 		"cat pipex_test.c | grep if "
 		"\"cat pipex_test.c\" | \"grep if\" "
 		if ((results_arr[i] = open(results, O_RDWR | O_TRUNC)) < 1)
 		if ((files_from_arr[i] = open(files_from, O_RDWR)) < 1)
 		if ((files_to_arr[i] = open(files_to, O_RDWR | O_TRUNC)) < 1)
-		if (system(pipex_argv) < 0)
+		if (system_status < 0 || system_status == 127)
+		diffs_fd = open("diffs", O_RDWR | O_TRUNC);
+		call_diff(files_from, results, diffs_fd);
+		if ((diffs_res = read_from_fd(diffs_fd)) != NULL)
+		close(diffs_fd);
+		free(diffs_res);
+		diffs_res = NULL;

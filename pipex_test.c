@@ -54,12 +54,41 @@ void	test(int fileFROM, int fileTO, char *command)
 		waitpid(pid, &status, 0);
 }
 
+void	call_diff(char * file1, char * file2, int fd)
+{
+	int		system_status;
+	char	*command;
+	pid_t	pid;
+
+	if ((pid = fork()) < 0)
+		error_exit("Failed to for process at call_diff");
+	if (!pid)
+	{
+		// if ((fd = open("diffs", O_TRUNC | O_RDWR)) < 0)
+		// 	error_exit("Failed to open diffs file");
+		if (dup2(fd, STDOUT_FILENO) < 0)
+			error_exit("Failed to redirect output to diffs");
+		system_status = system(command = ft_strjoin("diff ", file1, file2, "", ""));
+		if (system_status < 0 || system_status == 127)
+			perror("System failed at call_diff");
+		close(fd);
+		free(command);
+		exit(system_status < 0 || system_status == 127 ? EXIT_FAILURE : EXIT_SUCCESS);
+
+	}
+	else
+		waitpid(pid, &system_status, 0);
+}
+
 int	main()
 {
+	int		system_status;
+	int		diffs_fd;
 	int		results_arr[10];
 	int		files_from_arr[10];
 	int		files_to_arr[10];
 	char	*pipex_argv;
+	char	*diffs_res = NULL;
 	char	**pipex_commands;
 	char	results[] = "results/result \0";
 	char	files_from[] = "files_from/testFROM \0";
@@ -101,10 +130,26 @@ int	main()
 		if ((files_to_arr[i] = open(files_to, O_RDWR | O_TRUNC)) < 1)
 			error_exit("Can't open TO files");
 		pipex_commands = ft_split(tests_for_pipex[i], '|');
-		pipex_argv = ft_strjoin("./pipex ", files_from, pipex_commands[0], pipex_commands[1], results);
+		// pipex_argv = ft_strjoin("../pipex/pipex ", files_from, pipex_commands[0], pipex_commands[1], results);
+		pipex_argv = ft_strjoin("../pipex/pipex ", files_from, "\"echo $PATH\" ", "\"echo AJSHDGAJHSGDJAHSGDJHASD\" ", results);
 		printf("%s\n", pipex_argv);
-		if (system(pipex_argv) < 0)
-			perror("");
+		system_status = system(pipex_argv);
+		if (system_status < 0 || system_status == 127)
+		{
+			perror("System failed at main");
+			free_ptr_arr(pipex_commands);
+			free(pipex_argv);
+			exit(EXIT_FAILURE);
+		}
+		diffs_fd = open("diffs", O_RDWR | O_TRUNC);
+		call_diff(files_from, results, diffs_fd);
+		if ((diffs_res = read_from_fd(diffs_fd)) != NULL)
+			printf(RED "[KO]" COLOR_RESET "\n");
+		else
+			printf(GREEN "[OK]" COLOR_RESET "\n");
+		close(diffs_fd);
+		free(diffs_res);
+		diffs_res = NULL;
 		free_ptr_arr(pipex_commands);
 		free(pipex_argv);
 		test(files_from_arr[i], files_to_arr[i], tests[i]);
