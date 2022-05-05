@@ -1,8 +1,0 @@
-total 32
--rwxr-xr-x 1 root root 17168 May  4 15:46 a.out
--rw-r--r-- 1 root root   245 May  4 15:01 colors.h
--rw-r--r-- 1 root root  1355 May  5 15:07 pipex_test.c
----------- 1 root root     0 May  5 15:07 test
--rw-r--r-- 1 root root    88 May  5 12:18 test1FROM
--rw-r--r-- 1 root root     0 May  5 12:18 test1TO
-[33m[31mKO[32m OK [36mIDI NAXUY[0m

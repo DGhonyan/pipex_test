@@ -34,22 +34,15 @@ char	*read_from_fd(int fd)
 	return (s);
 }
 
-char	*test1(int fileFROM, int fileTO)
+void	test1(int fileFROM, int fileTO, char *command)
 {
 	int	status;
-	//int	fileFROM;
-	//int	fileTO;
 	pid_t	pid;
 
 	if ((pid = fork()) < 0)
 		error_exit("Can't fork process");
 	if (pid == 0)
 	{
-		//close(pipes[0]);
-	//	if ((fileFROM = open("test1FROM", O_RDONLY)) < 0)
-	//		error_exit("Can't open file test1FROM");
-	//	if ((fileTO = open("test1TO", O_TRUNC | O_WRONLY)) < 0)
-	//		error_exit("Can't open file test1TO");
 		if (dup2(fileFROM, STDIN_FILENO) < 0)
 			error_exit("Failed to redirect output STDIN");
 		if (dup2(fileTO, STDOUT_FILENO) < 0)
@@ -58,11 +51,7 @@ char	*test1(int fileFROM, int fileTO)
 		exit(EXIT_SUCCESS);
 	}
 	else
-	{
-		//close(pipes[1]);
 		waitpid(pid, &status, 0);
-	}
-	return (NULL);
 }
 
 
@@ -81,20 +70,36 @@ void	check(char *command)
 
 int	main()
 {
-	int		pipes[2];
-	int		result_files[10];
-	char	filename[] = "result \0";
-	char	files_from[] = "testFROM \0";
-	char	files_to[] = "testTO \0";
-
+	int		results_arr[10];
+	int		files_from_arr[10];
+	int		files_to_arr[10];
+	char	results[] = "results/result \0";
+	char	files_from[] = "files_from/testFROM \0";
+	char	files_to[] = "files_to/testTO \0";
+	char	*tests[] = {
+		"echo $PATH | grep /usr",
+		"els -l | cat",
+		"ls -lamp | grep a",
+		"echo \"HEWOOOOOO HOW ARE YOU\" | grep HOW",
+		"cat pipex_test.c | cat",
+		"echo $PATH | grep /usr",
+		"echo $PATH | grep /usr",
+		"echo $PATH | grep /usr",
+		"echo $PATH | grep /usr",
+		"echo $PATH | grep /usr",
+	};
 	for (int i = 0; i < 10; i++)
 	{
-		filename[6] = i + 48;
-		if ((result_files[i] = open(filename, O_RDWR)) < 1)
-			error_exit("Can't open result files");
+		results[14] = i + 48;
+		files_from[19] = i + 48;
+		files_to[15] = i + 48;
+		if ((results_arr[i] = open(results, O_RDWR)) < 1)
+			error_exit("Can't open RESULT files");
+		if ((files_from_arr[i] = open(files_from, O_RDWR)) < 1)
+			error_exit("Can't open FROM files");
+		if ((files_to_arr[i] = open(files_to, O_RDWR)) < 1)
+			error_exit("Can't open TO files");
+		
 	}
-	if (pipe(pipes) < 0)
-		error_exit("Failed at creating pipes");
-	//system("echo $PATH | grep aaaaaaaaaaaaaa");
-	printf(RED "KO" GREEN " OK " CYAN "IDI NAXUY" COLOR_RESET "\n");
+	printf(YELLOW "KO" GREEN " OK " CYAN "AAAAAA" COLOR_RESET "\n");
 }
